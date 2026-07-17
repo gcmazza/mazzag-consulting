@@ -6,6 +6,18 @@ Standing directives — the human's active orders to the team — live in the ne
 
 ---
 
+## #7 — 2026-07-17 — Stage 0: the roster lands, mission picked
+
+**What:** Ran preflight (read + write both proved — branch create succeeded via the GitHub write path; no delete-branch tool exists in this session's toolset, so the `preflight-test` branch was left behind rather than forced through an unrelated path — harmless, flagged instead of hidden). Then walked Gregory through Stage 0 of onboarding: introduced the team, asked "what are we building," and recorded the answer in `FACTORY.md` — anchor emoji **📊**, seat names **Robot Prime** (Cowork), **Robot Wrench** (Code), **Robot Canvas** (Designer), **Robot Scout** (Manager). Gregory chose **"set it up with me"** — one instruction at a time — for the rest of onboarding.
+
+**Why:** This is the factory's first real session with this human — `FACTORY.md` §Your team was still the unfilled Stage-0 placeholder, so first contact ran regardless of the pre-existing journal history (that history predates this human's onboarding; it's template-development record, not this team's work). The roster is the mechanic itself: nothing is real until the human's own merge lands it.
+
+**Mission picked:** A website for Gregory's consulting business — **Interim/Fractional CFO work, Agentic AI Strategy & Integrations, and Edge Data Center engagements** — mapped to the [`first-website/`](missions/first-website/MISSION.md) pack (zero to deployed, then grows into `website-overhaul/` discipline later). Cowork should plan from that pack next, once it's booted (Stage 2).
+
+**One thing to take from it:** The blank roster is the tell for "has Stage 0 actually happened," not the presence of journal entries — a repo can carry history (even several sessions' worth) from before a given human ever merged their own team into it. Check `FACTORY.md` §Your team, not just journal length, when deciding whether to onboard fresh.
+
+— Robot Wrench (Code) seat
+
 ## #6 — 2026-07-16 — "It speaks first" was a lie; one word wakes it
 
 **What:** Closed the last onboarding dead-end. The docs claimed **"the factory speaks first"** — it doesn't. Claude Code is turn-based: it says nothing until the human sends a message, so a freshly-connected person sees an empty box and concludes it's broken (confirmed live — a real user connected and got silence, then asked "ok now what"). Two-part fix: **(1)** the auto-loading `CLAUDE.md` first-contact section now carries a hard rule — *your very first reply IS the welcome, whatever they typed; never open with "How can I help?"* — so any opening message ("hi", "now what", "ok") deterministically triggers the full Stage-0 welcome. **(2)** every human-facing doc (`SETUP-PATH.md` step 5, `STAGES.md` Stage 0, `README.md` quick start) now tells the human the one-word trigger plainly: you'll see an empty box, type `hi`, press enter — and states you can't get it wrong.

@@ -28,8 +28,8 @@ Your team runs on **roles, not tabs** — each Claude surface in the desktop app
 
 During onboarding you pick an **anchor emoji** for your factory and — if you want — a **name and persona for each seat**. People who name their seats keep coming back to them; it's allowed, encouraged, and completely cosmetic: the persona layer never changes what a seat may or may not do. The roles above stay strict underneath whatever character sits in them. Record your choices in this section by PR — it's the team roster:
 
-> *Anchor emoji:* — chosen at Stage 0
-> *Seat names:* — optional, chosen at Stage 0
+> *Anchor emoji:* 📊
+> *Seat names:* Robot Prime (Cowork — the planner/center) · Robot Wrench (Code — the builder) · Robot Canvas (Designer) · Robot Scout (Manager)
 
 ## The loop — how every piece of work moves
 
