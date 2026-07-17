@@ -6,6 +6,20 @@ Standing directives — the human's active orders to the team — live in the ne
 
 ---
 
+## #8 — 2026-07-17 — First site built and merged, Cowork's chat connection still open
+
+**What:** Built and shipped the `first-website` mission's first real deliverable: a new **workshop repo**, [`mazzag-website`](https://github.com/gcmazza/mazzag-website), with a full one-page site for Mazza-G Consulting Services (Interim/Fractional CFO for PE and mid-market $20M–$1B+, Agentic AI Strategy & Integrations, Edge Data Center advisory) — merged via [#1](https://github.com/gcmazza/mazzag-website/pull/1). Ran it against the mission's five-point SEO gate: unique title/description, real generated OG/Twitter link-preview card, `ProfessionalService` structured data, semantic HTML with alt text, and a sitemap entry. Verified in headless Chromium before opening the PR, not just eyeballed. A follow-up phone-number correction landed via [#2](https://github.com/gcmazza/mazzag-website/pull/2), same discipline.
+
+Two tool-permission gaps surfaced along the way, both worked around honestly rather than silently: the GitHub App connection here can't create new repositories (`403`, Administration permission not granted) — Gregory created `mazzag-website` by hand instead — and it can't flip repository Settings like Pages either, so enabling GitHub Pages for an instant preview link is still a manual step on his end. Also hit a real edge case: a brand-new empty repo has no branch at all, so there was nothing to open a PR against — fixed with a human-approved, narrowly-scoped exception (one orphan placeholder commit pushed straight to `main`, explained and asked for in chat before doing it), after which the real content went through the normal branch+PR+merge path like everything else.
+
+**Why:** Cowork's chat-room GitHub connection hit a snag this session (repo showed as found but chat couldn't read it — likely account-level connector authorization vs. a repo actually attached as a source in that conversation; unconfirmed, since it's a surface this Code session can't see). Rather than block the human's actual goal on that, Code planned and built directly — explicitly flagging that the normal Cowork audit pass didn't happen, so nobody mistakes this for the full two-seat loop.
+
+**Standing item (not yet a directive, needs Gregory's eyes next session):** `mazzag-website` is live in content but not live on the internet — deploy needs two Cloudflare secrets (`CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, see that repo's `README.md`) and a Cloudflare Pages project named `mazzag-website`; GitHub Pages was offered as a faster interim preview link but its manual toggle step (Settings → Pages) hasn't been confirmed done. The site's meta tags also assume the domain `mazzagconsulting.com`, which is an unconfirmed placeholder, not a purchase.
+
+**One thing to take from it:** When a chat-room seat's connection is flaky, "wait until it's fixed" isn't the only honest option — the human's actual goal (a real website) matters more than the org chart being followed exactly, as long as the gap is named out loud instead of hidden. What can't be skipped, even under time pressure, is the merge gate itself: every change here, including the awkward orphan-branch bootstrap, still went through an explicit ask and a real PR.
+
+— Robot Wrench (Code) seat
+
 ## #7 — 2026-07-17 — Stage 0: the roster lands, mission picked
 
 **What:** Ran preflight (read + write both proved — branch create succeeded via the GitHub write path; no delete-branch tool exists in this session's toolset, so the `preflight-test` branch was left behind rather than forced through an unrelated path — harmless, flagged instead of hidden). Then walked Gregory through Stage 0 of onboarding: introduced the team, asked "what are we building," and recorded the answer in `FACTORY.md` — anchor emoji **📊**, seat names **Robot Prime** (Cowork), **Robot Wrench** (Code), **Robot Canvas** (Designer), **Robot Scout** (Manager). Gregory chose **"set it up with me"** — one instruction at a time — for the rest of onboarding.
