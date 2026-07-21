@@ -21,6 +21,18 @@ Verified against Anthropic's live documentation on 2026-07-14 (the private-repo 
 
 *Done looks like: you typed one word, and the team introduced itself and asked its question. Total: one download, two sign-ins, one authorize click, one repo pick, and one "hi".*
 
+### Authorize is only HALF — verify the app is INSTALLED (the trap that eats evenings)
+
+The **Authorize** click in step 3 connects GitHub to your *Claude account*. That is **half** the connection. The other half is the Claude **GitHub App** being **Installed** on your *GitHub account* — a different switch, on a different page. People finish half one, see "Connected," and stop — then every change a session tries to make silently fails while the chat acts perfectly healthy. Don't be caught by it — verify both halves once, now:
+
+1. Go to **<https://github.com/settings/installations>**.
+2. Confirm **Claude** appears under **Installed GitHub Apps** (not merely under the separate **Authorized GitHub Apps** tab — *authorized ≠ installed*).
+3. If it's missing under Installed: **<https://github.com/apps/claude>** → **Install** → your account → **All repositories** → the green button.
+
+The full, plain-words version of this — and what to do if a session tells you it can read but can't write — is [`CONNECT-YOUR-CLAUDE.md`](CONNECT-YOUR-CLAUDE.md). Your Code session now also **proves this itself** at the start of every session (read + write test) — so if a half-connection ever slips through, the session stops and points you here instead of failing quietly.
+
+**One more rule that saves an evening:** if you fix a connection while sessions are already open, **those old sessions keep dead credentials — never resume them.** Start one brand-new session after connecting, and let it lead.
+
 ### If your repo isn't in the list — the private-repo fix (and you keep it private)
 
 **The symptom:** you connected GitHub, your **public** repos appear in the selector, but your **private** factory repo is missing. **Nothing is broken, and you do NOT need to make it public.** A private repository is invisible to any app you haven't explicitly shared it with — that's GitHub protecting your private code by default, working exactly as designed. Claude's GitHub connection just hasn't been granted this one repo yet. Grant it once:
@@ -31,6 +43,18 @@ Verified against Anthropic's live documentation on 2026-07-14 (the private-repo 
 4. Back in the Claude Code repository selector, refresh it — your private repo is now in the list. Pick it and continue to step 5 above.
 
 That one grant hands Claude *just this repo* and nothing else. Your factory stays private; it's now simply visible to the one tool that runs it.
+
+## Where your builder runs — cloud or Local (and why you rarely need to care)
+
+Above the Code tab's message box sits an **environment button** — it may read **"Default"** with a small cloud icon. It decides where your session actually runs: **in the cloud** (on Anthropic's computers) or **Local** (on your own machine). Cloud is the normal mode, and it's the right one for building — reading your repo, writing, and opening pull requests all work perfectly from there. You don't need to change anything on day one.
+
+Once in a while a step needs *your* side of the screen — connecting an account, installing an app, something only your logged-in browser or your own machine can do. **Your seat will tell you** when that's the case; it's built to say so plainly instead of failing quietly. When it does, the switch is three taps:
+
+1. Click the **environment button** above the message box.
+2. Choose **Local**.
+3. Start a **fresh** session (don't resume an old one) and ask again there.
+
+That's it. You never have to guess which mode you're in — if a step needs Local, the seat says so and hands you these exact taps.
 
 ## Phase 2 — the choice (Code asks; both answers are right)
 

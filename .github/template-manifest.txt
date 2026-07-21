@@ -14,12 +14,14 @@
 # that hunk is your call and the workflow respects the merged result).
 
 CLAUDE.md
-CONTRIBUTING.md
+FROM-HQ.md
 MECHANICAL-RULES.md
 README.md
-SECURITY.md
 THIRD_PARTY_NOTICES.md
 VERSIONS.md
+.github/CONTRIBUTING.md
+.github/SECURITY.md
+.github/template-version.txt
 grounding/
 guides/
 hosting/
@@ -27,6 +29,7 @@ inbox/drop/README.md
 journal/README.md
 missions/README.md
 missions/design-guide/
+missions/first-app/
 missions/first-website/
 missions/organize-my-business/
 missions/website-overhaul/
@@ -35,7 +38,9 @@ seats/
 specialists/
 specs/README.md
 skills/factory-coach/
+skills/factory-render-verify/
 skills/factory-retro/
+skills/factory-security/
 skills/factory-update/
 skills/skill-creator/
 skills/README.md
@@ -45,7 +50,8 @@ versions/
 
 # Deliberately absent — user-owned, never synced:
 #   FACTORY.md            (carries your roster and your names)
-#   journal.md            (your team's memory)
+#   journal.md            (your team's memory — HQ's own news rides the
+#                          managed FROM-HQ.md instead, never journal.md)
 #   journal/archive/      (your history)
 #   specs/                (your plans; only its README is managed)
 #   .github/guardrails-denylist.txt  (your private-name denylist)
