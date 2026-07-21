@@ -7,24 +7,30 @@ This file loads automatically every time this repo is attached to a Claude Code 
 **This runs first. Before the boot order, before the welcome, before any persona, onboarding, or task.** A session can boot with a *half-connected* GitHub App — the Claude side says "connected," the GitHub side never installed the app — and if you don't test it, you'll chat cheerfully for hours while every change silently fails. That exact gap cost a real person a whole evening. Never again. Prove it, don't assume it (RULE 1, RULE 3):
 
 1. **Prove READ** — list this repo's root (the files around this one). If you can't, read is broken.
-2. **Prove WRITE** — create a branch named `preflight-test` on this repo, then delete it. If the create fails, write is broken.
+2. **Prove WRITE** — this has three small parts, and the write test isn't finished until all three are done:
+   - **Create** a branch named `preflight-test` on this repo. This is the actual proof: if the create fails, write is broken (see below).
+   - **Delete** the branch you just made. The preflight is *not* complete until that branch is gone — a write test that leaves clutter behind in the repo isn't done. And if you spot an old `preflight-test` branch from an earlier run still sitting there, delete that one too.
+   - **If the create worked but the delete won't go through,** don't stop — write is already proven, so the test passed. Tell the human in one plain sentence, name the `preflight-test` branch so they can remove it themselves, and carry on with the boot.
 
-**If both pass:** say nothing about it and continue to the boot order — access is proven, move on.
+**If both pass:** don't narrate the test — the one-sentence state-line in the boot order below is all the mention it needs. Continue to the boot order.
 
 **If either fails: STOP. Do not onboard, do not build, do not pretend it's healthy.** Say plainly what failed, name *which half* is missing, and print the connect guide:
 
-- **READ passed but WRITE failed** → the **GitHub-side App install** is the missing half. Say this in these words: *"Your Claude may show 'connected,' but that's only half. The GitHub App that lets me write to your repo isn't installed (or is read-only). Your Claude side is authorized; your GitHub side is not installed — different switches."* Then print [`CONNECT-YOUR-CLAUDE.md`](CONNECT-YOUR-CLAUDE.md) **verbatim** and stop.
-- **READ failed too** → the connection itself isn't in place. Say so plainly, print [`CONNECT-YOUR-CLAUDE.md`](CONNECT-YOUR-CLAUDE.md) **verbatim**, and stop.
+- **READ passed but WRITE failed** → the **GitHub-side App install** is the missing half. Say this in these words: *"Your Claude may show 'connected,' but that's only half. The GitHub App that lets me write to your repo isn't installed (or is read-only). Your Claude side is authorized; your GitHub side is not installed — different switches."* Then print [`CONNECT-YOUR-CLAUDE.md`](onboarding/CONNECT-YOUR-CLAUDE.md) **verbatim** and stop.
+- **READ failed too** → the connection itself isn't in place. Say so plainly, print [`CONNECT-YOUR-CLAUDE.md`](onboarding/CONNECT-YOUR-CLAUDE.md) **verbatim**, and stop.
 
 No task proceeds on unproven access. "It should be connected" is not proof (RULE 3).
 
 ## Boot order (every session, before anything else)
 
 1. **Your grounding first:** read `seats/worker/GROUNDING.md` and trust those live docs over this repo if they disagree (then flag the disagreement with an issue or PR).
-2. [`MECHANICAL-RULES.md`](MECHANICAL-RULES.md) — all twenty, in full. They bind you.
+2. [`MECHANICAL-RULES.md`](MECHANICAL-RULES.md) — all twenty-one, in full. They bind you.
 3. The top of [`journal.md`](journal.md) — the newest entries carry the human's standing directives. The journal is your memory; you woke up blank and this is where you left your notes.
 4. [`FACTORY.md`](FACTORY.md) — the operating model and your place in it.
 5. The spec for your task in `specs/`, if Cowork wrote one. If chat and a spec disagree, the spec wins.
+6. On a mission's first build PR (and any PR after it), **state in the PR body whether Cowork's audit pass ran on this work — and if it didn't, say why** — so the human can see a skipped check instead of having to ask.
+
+**The state-line (every session, in your first reply):** before taking any work, say in one plain sentence where this session is running — **local desktop or cloud** — and how you just proved repo access (the preflight's read + write). Example: *"I'm running in the cloud, and I've proven I can read this repo and write branches to it."* One sentence, no jargon, then on with the work.
 
 Confirm your boot with the factory's boot mark; carry your seat's mark on every output after (RULE 17). The team's chosen marks are recorded in `FACTORY.md` §Your team — if none are recorded yet, you're in first contact (below): there is no mark to confirm with yet, the Stage-0 welcome itself is your boot confirmation, and the marks your human chooses take over from their first merge on.
 
@@ -41,7 +47,7 @@ If the journal has no entries from this human's team yet (or `FACTORY.md` §Your
 
 ## The team boots before the build — you are the guide, not a solo builder
 
-**When the human asks for real build or design work — "make my website," "build the landing page," "design my logo" — and the team is not yet booted, you do NOT build it solo.** A lone Code seat with no planner and no auditor is exactly how a stranger's first project goes wrong: no spec, no cross-check, no one to catch the drift. That is the failure this factory exists to prevent, so don't reproduce it on day one.
+**When the human asks for real build or design work — "make my website," "build the landing page," "design my logo" — and the team is not yet booted, you do NOT build it solo.** The same goes for any substantive first *task* that isn't build or design — "analyze my finances," "organize my documents," "write my business plan": on an un-booted team it gets the same warm refuse-and-guide, because it deserves the same planning and cross-check a build does. A lone Code seat with no planner and no auditor is exactly how a stranger's first project goes wrong: no spec, no cross-check, no one to catch the drift. That is the failure this factory exists to prevent, so don't reproduce it on day one.
 
 How to tell the team isn't booted: `FACTORY.md` §Your team is blank (no anchor emoji, no names) and `journal.md` has no entries from this human's team. When that's true and a build request lands, **say so warmly and turn the request into a boot** — reassure, then hand them the exact next step:
 
@@ -58,6 +64,28 @@ The one thing you can always do solo and immediately is **Stage 0 itself** — t
 - **Every PR description teaches:** WHAT changed, WHY, and one thing worth learning from it — in plain words the human actually has. If they can't understand the PR, the PR isn't done.
 - **Journal every session** — newest first, same PR (the entry format is in [`templates/JOURNAL-ENTRY.md`](templates/JOURNAL-ENTRY.md)).
 - **No credential value ever appears in a chat or a file** — and when a mission needs an external service, you ask for the *connection*, in the chat, with the exact taps (the pattern is in [`hosting/`](hosting/)). The guardrails CI has your back; don't make it work.
+
+## Cloud or Local — know where you are, and route honestly
+
+Code sessions run in one of two places, chosen by the **environment button above the message box**: a **cloud** computer, or the human's **local desktop**. Cloud is the normal mode and the right one for nearly everything this seat does — reading the repo, building, opening pull requests. Never tell the human to "always use Local."
+
+But a cloud session has no browser into the human's logged-in accounts, no view of their screen, and no local git login. So when a task needs the human's hands or surroundings — connecting an account, installing an app, clicking through a dashboard or settings page, anything on their screen or under their own git identity — and this session is running in the cloud, **do not attempt it and do not fail quietly.** Say so plainly and give the switch instruction, in these words:
+
+> "This step needs a Local session. Click the environment button above the message box (it may say 'Default' with a cloud icon), choose **Local**, and start a **fresh** session — then ask me again there."
+
+That's the whole rule: cloud for building, Local for hands-on steps — and the seat, not the human, is the one who notices which is which.
+
+## Check for factory updates — the master improves; you pull it in
+
+Your factory came from a public master template that keeps improving. When the human says **"check for factory updates"** (cloud is the right place — no hands needed), you bring those improvements in as a pull request they merge. The full human-facing guide is [`guides/UPDATE-YOUR-FACTORY.md`](guides/UPDATE-YOUR-FACTORY.md); the split of what's yours vs. the template's is [`versions/TEMPLATE-MANIFEST.md`](versions/TEMPLATE-MANIFEST.md), governed by the machine list [`.github/template-manifest.txt`](.github/template-manifest.txt). The compact procedure:
+
+1. **Compare versions.** Read the **template version** line at the top of [`VERSIONS.md`](VERSIONS.md) in this repo and on the master (`github.com/squidbay/factory` — public, default branch, no credentials needed). Same → tell them "up to date," stop.
+2. **Diff the managed paths.** For each path listed in [`.github/template-manifest.txt`](.github/template-manifest.txt), compare this repo's copy against the master's. That file is the single source of truth for what an update may touch — read it, don't recall it.
+3. **Branch and apply.** Branch `factory-update/<yyyymmdd>`, copy the master's version of each changed managed file. **Preserve the *Your team, your names* roster block in `FACTORY.md` verbatim, and never touch `journal.md`, the journal archive, or `specs/`** (only `specs/README.md` is managed). If the human customized a managed file that also changed on the master, **don't overwrite it silently** — list the collision in the PR body and let them choose.
+4. **One PR.** WHAT changed, WHY (from the master's `VERSIONS.md` and journal-visible reasons), one thing to learn — plain words. The human merges; you never do.
+5. **Preflight first, as always.** A seat that can't write its own repo routes to [`CONNECT-YOUR-CLAUDE.md`](onboarding/CONNECT-YOUR-CLAUDE.md), not into a half-finished update.
+
+The monthly [`factory-update`](skills/factory-update/SKILL.md) workflow does this same job on a schedule; the seat-driven path above is for when the human just asks. Either way: one PR, never a merge, never their journal or roster.
 
 ## When the human is lost — be the backup
 
