@@ -6,6 +6,16 @@ Standing directives — the human's active orders to the team — live in the ne
 
 ---
 
+## #9 — 2026-07-21 — Boot-update check: Code's surface is current, three seats unverified by network policy
+
+**What:** Ran preflight (both halves passed — GitHub write confirmed live via `create_branch` reaching a real 422 "already exists," not an auth failure; the leftover `preflight-test` / `preflight-test-push-check` branches couldn't be deleted — `git push --delete` and `origin :branch` both got a clean 403 from the write path, distinct from the 422 create result, so it reads as a missing delete-scope on the GitHub App rather than a broken connection; flagged rather than forced). Then, at the human's request, checked all four seats' `BOOT-PROMPT.md`/`GROUNDING.md` docs against Anthropic's live pages for drift. Read every seat's boot prompt and `onboarding/ONBOARD-YOUR-TEAM.md` in full first. Code/Worker's own surface checked out clean against `code.claude.com/docs/en/overview`: repo-attach auto-boot and the `CLAUDE.md`-loads-automatically claim are still accurate, no changes needed to `seats/worker/` or the "Code — the builder" section of the onboarding doc.
+
+**Why it stopped short of all four seats:** Cowork's and Designer's grounding links point at `support.claude.com`; the onboarding doc's Manager/Cowork steps ("Settings → Skills → upload") point there too by implication. Direct `curl` to `support.claude.com` and to `claude.com` returned a **403 on the CONNECT tunnel itself** — not a page-level block, a network-policy block on this session's environment. `code.claude.com` and the GitHub write path both worked fine in the same session, so this is a scoped allowlist, not a broken connection. Recorded the exact finding in `VERSIONS.md` rather than guessing at what those pages currently say.
+
+**One thing to take from it:** A Code session's "check for updates" step (`GROUNDING.md`'s step 6) can only ever verify the live docs its own environment's network policy actually reaches — it is not a substitute for Cowork, Designer, and Manager each running their own step 6 in their own rooms, where `support.claude.com` is reachable. If a factory-wide doc audit is wanted again, it needs to run from (or be cross-checked against) a surface that isn't network-scoped the way this Code environment is.
+
+— Robot Wrench (Code) seat
+
 ## #8 — 2026-07-17 — First site built and merged, Cowork's chat connection still open
 
 **What:** Built and shipped the `first-website` mission's first real deliverable: a new **workshop repo**, [`mazzag-website`](https://github.com/gcmazza/mazzag-website), with a full one-page site for Mazza-G Consulting Services (Interim/Fractional CFO for PE and mid-market $20M–$1B+, Agentic AI Strategy & Integrations, Edge Data Center advisory) — merged via [#1](https://github.com/gcmazza/mazzag-website/pull/1). Ran it against the mission's five-point SEO gate: unique title/description, real generated OG/Twitter link-preview card, `ProfessionalService` structured data, semantic HTML with alt text, and a sitemap entry. Verified in headless Chromium before opening the PR, not just eyeballed. A follow-up phone-number correction landed via [#2](https://github.com/gcmazza/mazzag-website/pull/2), same discipline.
