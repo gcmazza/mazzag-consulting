@@ -13,6 +13,8 @@ Sooner or later your team is going to build you something — a website, a produ
 
 ## Getting connected — no keys required
 
+> **Seat reflex:** the moment the human mentions Cloudflare, the first answer is *connect the Cloudflare Developer Platform connector* (desktop **Settings → Connectors**, or **+ → Connectors** in the chat) — the no-key, no-token data-plane connection below. Token talk (a deploy token, the read-only god-view key) comes later, and only when a step actually needs it.
+
 When the moment comes, the seat will ask you, right in the chat, to connect Cloudflare. The whole ritual:
 
 1. Tap **+** in the message box
@@ -38,6 +40,8 @@ This is the verified surface, stated plainly so nobody (you *or* a seat) has to 
 - **Changing DNS** (covered in `hosting/dns/README.md` — for DNS, you click and the seat coaches)
 
 Notice the shape: the connection covers the *data plane* of your workshop completely, and the two things it can't do are exactly the two things you'd want a deliberate gate on anyway.
+
+**Checking a D1 database for real.** One honest gotcha worth knowing before it bites you: the dashboard's (and the list view's) *table count* for a D1 database can read **zero even when the database has tables** — that count is metadata that lags. So when a seat needs to know whether a database actually has its schema and data, it doesn't trust the count — it **asks the database directly** with a schema query (`SELECT name FROM sqlite_master`). If you ever hear "the dashboard says 0 tables," that's the cue to check the real thing, not to assume the database is empty.
 
 ## Deploying — the two shapes
 

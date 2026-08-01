@@ -1,39 +1,22 @@
-# News from HQ
+# Archive — HQ update notes (complete history)
 
-This page carries news about the factory template — the shared starting point your factory was built from. The team that maintains that template is "HQ," and when they ship an improvement, a short note about it lands here: what changed, why, and one thing worth taking from it, newest first.
+This file is the **in-repo permanent archive** of every [`FROM-HQ.md`](../FROM-HQ.md)
+update note, oldest kept here so the live page can stay at its ~ten-note window
+without any note being lost.
 
-These notes reach you the same way every other improvement does — as an update pull request you read and merge. Nothing here changes on its own.
+Two records exist, on purpose:
 
-Two things worth knowing:
+- **GitHub Releases** are the canonical permanent record for every version from
+  **2026-07-23.1 (#12)** onward — each release's tag is the version and its body
+  is that note. See <https://github.com/squidbay/factory/releases>.
+- **This file** mirrors the full history, and is the *only* home for the
+  **pre-Release backlog (#2–#11)** — the notes that shipped before the update
+  lane moved onto GitHub Releases and therefore have no release of their own.
 
-- **This page belongs to the template, and HQ keeps it current.** Updates refresh it; you never have to write here.
-- **Your own memory lives in [`journal.md`](journal.md), and it is yours alone.** HQ never writes there. That page is your team's story — one entry each working session; this page is the template's.
-
-The notes below began life in that journal, back when template news and your team's own memory shared a single page. They were moved here so each page can be honest about who it belongs to.
-
-**How this page rolls.** This file keeps roughly the ten most recent notes — enough to see where the template has been lately without the page growing without end. The permanent record of every update from **2026-07-23.1 (#12)** onward *is* the template's [GitHub Releases](https://github.com/squidbay/factory/releases) history: each release is one of these notes, dated and tagged, kept for good. The notes that shipped *before* the update lane moved onto Releases — the **pre-Release backlog (#2–#11)** — have no release of their own, so the full history is mirrored in the one correct in-repo home: [`versions/FROM-HQ-ARCHIVE.md`](versions/FROM-HQ-ARCHIVE.md). So when a note ages past the recent window it simply rolls off here, already preserved (in Releases, in the archive, or both). Two hard rules on that roll: it never touches your own [`journal.md`](journal.md) — that page is your team's memory, and HQ never writes or files there — and the in-repo archive home is [`versions/`](versions/README.md), never your journal.
+Nothing here changes on its own; like every other page it reaches you as a pull
+request you merge. Newest first, matching `FROM-HQ.md`.
 
 ---
-
-## #15 — 2026-07-26 — Your factory arrives named, and every seat reports status the same way
-
-**What:** Two changes to your first five minutes and to how seats talk. (1) **The roster is pre-filled.** `FACTORY.md` §Your team now ships with an anchor (🏭) and a mark for every seat — Cowork 🤖🧭, Coach 🤖📋, Code/Worker 🤖🔧, Designer 🤖🎨, Inspector 🤖🔎, Dispatch/Scout 🤖🔭 — instead of two blank lines waiting on you. Nothing asks you to invent an emoji any more: `CLAUDE.md` and [`onboarding/STAGES.md`](onboarding/STAGES.md) introduce the team *by* those marks and mention renaming only as something available later, and all four seat boot prompts now say to read the marks from `FACTORY.md` and **never** ask you for one. Renaming is still yours whenever you want it — one line, one PR. (2) **One status table, all four seats.** The old mood row (fresh · steady · leaning in · tension · frustrated · running hot · done) had drifted into a different shape in each boot prompt. It's replaced everywhere by one eight-state table under the label `Status —`: 🥸 BOOTING · 😎 NOMINAL · 😊 ENGAGED · 🤔 UNVERIFIED · 🔭 BLIND · 🚧 BLOCKED · 🥵 HOT · 🪫 SPENT. Anything other than 😎 carries one line of why, and faces stay in chat — never a PR, never a committed file.
-
-**Why:** A brand-new person, five minutes in, was being asked to name a factory they hadn't seen work yet — a decision with no information behind it, standing between them and the thing they came to build. One customer typed "robot wrench" as their worker's mark, because that's a reasonable thing to type when a stranger asks you a question you have no basis to answer. A default costs nothing and can be changed in ten seconds; a blocking question costs trust at the exact moment you have none to spare. The status table is the same instinct pointed at the seats: three of the old faces reported *mood* (tension, frustrated) where what you actually need is *state* — is this seat's output verified, is it blind, is it out of room? 🤔 UNVERIFIED, 🔭 BLIND, 🚧 BLOCKED, and 🪫 SPENT tell you something you can act on.
-
-**One thing to take from it:** defaults are a kindness, and the moment to ask someone a question is when they have the information to answer it — not at the door. If a piece of your own product opens with a question the user can't yet have an opinion about, ship a good default and let the choice find them later.
-
-— Code seat
-
-## #14 — 2026-07-23 — Two trues: name the environment before trying it, and one boot pattern for every human seat
-
-**What:** Two small honesty fixes to how the factory talks about *where* it runs and *how* each seat wakes. (1) **The Cloud-or-Local rule now names the environment a step needs *before* trying it** — no more attempt-in-the-cloud-then-fail. The moment a seat sees a step needs your own machine, your logged-in browser, or your screen, it says so up front ("this needs Local — click the environment button, choose Local"), in `CLAUDE.md`, the Worker grounding, and the setup guide. That guide also gained the plain-words version: your Code seat can use your computer *for* you — you never open a terminal; **Local** runs on your own machine (your browser logins work), **cloud** runs on Anthropic's servers (repo work only). (2) **Boot symmetry:** every human seat — Manager (Chat), Cowork, Designer — now boots the same one-time way, a boot skill you add once and invoke by name; the Designer skill picker went live in the Claude Design canvas on 2026-07-23, so the old "paste the boot file at the canvas root" step is now the fallback, not the main path. Only **Code** is different — it boots on the repo root automatically, nothing to install.
-
-**Why:** A seat that *tries* a hands-on step in the cloud and only then discovers it can't burns your time and reads as broken; naming the right environment up front turns a silent failure into one clear sentence. And when three of the four seats already booted by a skill, the doc still singling Designer out as "paste a file" made the team look more complicated than it is — the canvas skill picker going live let the docs tell one simple story instead of two.
-
-**One thing to take from it:** the seat should notice its own surroundings so you never have to — and when a capability (like the canvas skill picker) goes live, sweep the docs that described the old workaround, so the team's instructions match what the tools actually do now.
-
-— Code seat
 
 ## #13 — 2026-07-23 — A GitHub grounding page for every seat
 
@@ -202,5 +185,25 @@ a matter of taste and becomes something the team can actually prove.
 1. **Assume humans do not know what to do — build and test for zero prior knowledge.** Any onboarding step where a real person can get stuck with no in-doc way out is a **blocker**, not a "good enough for now" — treat it as ship-stopping until a named, verified fix exists in the doc. *Done when:* the team stops down-grading onboarding snags to "minor/not-a-blocker" and every known snag has a named fix path in `onboarding/`. (Standing — does not expire.)
 
 **One thing to take from it:** The setup is the product's first impression, and it's the one moment your user has *zero* context to recover from a surprise. When you can't picture the least-technical person you know getting through a step unaided, that step is broken — even if it "works" for someone who already knows the answer.
+
+— Code seat
+
+## #3 — 2026-07-14 — Every seat now shows its state
+
+**What:** Two additions to how seats work. First, a probe-and-update step at boot: before any work a seat enumerates the tools it actually has — not the ones it remembers — and checks its live capability docs for anything new, so it never hands you a task one of its own tools could do and never runs on a stale picture of itself. Second, the boot-confirm rule grew a state face: after a seat confirms its boot, every chat turn ends with an honest read of how it's doing — fresh, steady, leaning in, tension, running hot, done. The face is a voice, not a costume; a seat uses it to tell you when it's cooked or uneasy, with one line of why. Marks and faces stay in chat, never in a PR or a committed file.
+
+**Why:** The old per-output mark stopped working — seats stamped it reflexively everywhere, so a tired seat looked identical to a fresh one. State is the signal that actually predicts when a seat should hand off. And the probe step turns "know your tools" from a hope into a boot step.
+
+**One thing to take from it:** Watch the faces. A seat sliding toward running-hot, or wearing a face that doesn't match its work, is your cue to say "journal out" and boot a fresh one — before drift compounds.
+
+— Code seat
+
+## #2 — 2026-07-14 — The setup path gets a map
+
+**What:** A new onboarding page, [`SETUP-PATH.md`](onboarding/SETUP-PATH.md) — the least-resistance path from nothing to a running factory, every click and permission dialog named, verified against Anthropic's live documentation. Stage 0 now offers the choice out loud: "set it all up for me" (Code drives, with Claude in Chrome clicking alongside) or "set it up with me" (guided, one instruction at a time). The grounding table gained six live-doc links (Code, Cowork, Chrome, computer use, Design), and the page carries an honest gaps list — the clicks no automation can remove, named so the team meets you there instead of pretending.
+
+**Why:** Minimal setup is the product. The person at the front door should do exactly one manual phase — download, sign in, connect a repo — and then be offered working hands for the rest. And the seats themselves need current ground truth about their own surfaces, which is what the live-doc links are for: stateless seats drift; linked pages don't.
+
+**One thing to take from it:** The gaps list is the design, not an apology. Every unavoidable dialog is a moment the system chose to keep a human hand on a key — naming those moments is what makes "Claude sets up the rest" trustworthy rather than magical.
 
 — Code seat
