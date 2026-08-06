@@ -11,13 +11,37 @@ You already pay for a team — you're just using it one chat at a time. This tem
 ## 🧰 What you get
 
 - **A persistent team, not a chatbot.** Cowork plans and audits every change — with a security read folded into that audit whenever a PR touches credentials, workflows, auth, payments, or personal data — Code builds, Design handles the visual lane, Chat surfaces what matters. The same seats, every day, working the same project.
-- **Memory that survives.** Sessions are stateless; your factory isn't. A git journal remembers every decision, and every seat reads it at boot. Six months from now, "why is it like this?" has an answer.
+- **Memory that survives — and a trail anyone can audit.** Sessions are stateless; your factory isn't. Every session writes a journal entry before it ends — *journal-out* — so the repo remembers every decision and every seat reads it at boot. Months of entries add up to more than memory: a fresh seat, you, or an outside auditor can read *how you got here* in a single request. Six months from now, "why is it like this?" has an answer — and so does "prove it."
 - **You are the only gate.** Every change — every one — arrives as a pull request you approve. Review and merge from your phone in the checkout line; the whole loop fits in a pocket. Live actions ask first too: when a seat works in a browser or on your screen, you get an **Allow-once** prompt — approve a single action, or just this session — and you can revoke it any time. Nothing touches your world without a yes.
-- **On-call specialists, summoned per job.** **Mobile Scout — your Dispatch on desktop & mobile** — carries your orders to the seats and relays each seat's status back to your phone, so you can run the team from a waiting room or the couch. The Chrome inspector opens your live pages in a real browser and reports back — it looks, never touches.
+- **On-call specialists, summoned per job.** **Mobile Scout — your Dispatch on desktop & mobile** — carries your orders to the seats and relays each seat's status back to your phone, so you can run the team from a waiting room or the couch. **Claude in Chrome opens your live pages in a real browser and *drives* them** — clicking and typing like a real user to walk a whole flow end to end, not just looking — always behind your per-action **Allow-once** approval, and (like every seat) never merging and never touching your secrets or `main`.
 - **Every seat tells you how it's doing.** At the bottom of every chat a seat signs off with an honest state face — 🥸 fresh · 😎 steady · 😊 leaning in · 😐 tension · 😤 frustrated · 🥵 running hot · 😖 done — so you can start it fresh before quality slips. Not decoration; a real signal (RULE 17).
 - **Rules that catch drift mechanically.** Twenty-one binding rules, seat-to-seat audits, and a tripwire that spots a seat losing its grounding before it acts on a bad memory.
 - **Secure by default.** No exposed services. No credential in any chat or file — a CI guardrail enforces it from your first commit. Broad access is read-only; write access is narrow, expiring, and behind your merge button.
 - **Missions to start from.** "What are we building?" has five ready answers — overhaul a website, produce an agency-grade design guide, organize the business, ship a first site, or ship a first phone app to both stores — each with its skills packed and its finish line defined.
+
+## 💡   Why it actually works — the thing we learned the hard way
+
+We spent months chasing the wrong race — a bigger model, a smarter single seat. The thing that changed everything was smaller and stranger. Give one seat an ordinary working connection to *do* the job; give a second seat a **read-only overseer view** to *check* it; and let the two confirm or deny each other. Neither has to *know* anything — they look, and they check each other's looking. Set up this way, an ordinary model runs circles around one brilliant seat working alone, because the factory's best output isn't either view — it's the **difference between them.** When the builder says "done" and the overseer says "not quite," that gap is a truth neither could see alone. Grounding beats memory; two honest eyes beat one clever one. It's why growing into the two-view setup — read wide to *see*, write narrow to *act*, every change cross-checked and gated by you — is the mode worth reaching for. We found it on a random day after months of pain, and it's the truest thing we know about running a team like this.
+
+## 🔭 How the God-View works — and why
+
+Here's a problem that sounds abstract until it bites you. **Every working connection has horse-blinders.** When a seat connects to your repo to *do* a job, it sees exactly that repo, through exactly the permissions it holds — and nothing else. Ask that same connection "is everything healthy?" and it can only answer for the small patch it can see. A builder checking its own work through its own keyhole will always tell you it looks fine. That isn't lying; it's blinders. It's the first hard lesson a real project teaches, and it's the one the factory was built around.
+
+The fix is a second kind of sight the factory calls the **God-View**: a **read-only overseer that looks down on everything at once and touches nothing.** It isn't a seat holding extra keys. It's a job you dispatch on demand — it rises above the whole system, reads the true state of your code, your runtime, and your edge all at once, writes down what it found, and comes back down. The keys it uses never sit in a chat or a session; they live in your repo's locked Actions store and are only ever *read*, never *held*.
+
+Three realms, one glance, always read-only:
+
+- **Your code** (GitHub) — what's actually on `main`, what shipped, what didn't.
+- **Your runtime** (your host) — is the thing actually up and serving, or just supposed to be?
+- **Your edge** (Cloudflare) — what the world really resolves to when someone visits.
+
+Three laws keep it honest:
+
+1. **It only reads.** Never a single write — the God-View exists to audit, not to act.
+2. **The keys never leave the vault.** No seat holds them; a dispatched workflow consumes them inside your Actions runner and hands back a plain report.
+3. **Ground truth on demand.** It grades reality as it is *right now*, not a remembered guess.
+
+**Sees all · touches nothing · keys stay in the vault.** It's how your factory can be *sure* — not hopeful — about its own health, without ever handing a live key to a chat.
 
 ## 🚀 Quick start
 
@@ -44,6 +68,7 @@ Morning coffee: two PRs waiting. One is a page your Code seat built overnight ag
 - Built by the team that runs this exact system in production every day — this template *is* our operating discipline, generalized. We eat the dog food.
 - The factory idles safely. Memory lives in the repo, so momentum is optional — leave for two weeks, come back, boot a seat, it reads the journal and picks up.
 - Surfaces change. [`VERSIONS.md`](VERSIONS.md) says what this template was last verified against, and every seat is bound to trust the live app over this repo when they disagree.
+- **Updates ride GitHub Releases.** To hear when a new template version ships, **Watch → Custom → Releases** on [the template repo](https://github.com/squidbay/factory) — watch Releases, not the whole repo — and every update still reaches you the only way anything here does: as a pull request you read and merge.
 
 ---
 
