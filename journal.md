@@ -6,6 +6,22 @@ Standing directives — the human's active orders to the team — live in the ne
 
 ---
 
+## #10 — 2026-08-06 — Business email specced and tooled, waiting on a Local session
+
+**What:** Landed the plan and the tooling for `greg@<your-domain>` — receive in Gmail, reply as the custom domain — as a merged-spec-plus-scripts package rather than a completed setup. Four files: `specs/cloudflare-email-greg.md` (the assignment for a Code session on Gregory's own machine), `scripts/setup-email-routing.mjs` (inbound, free), `scripts/setup-email-sending.mjs` (outbound, Workers Paid, beta), `runbooks/cloudflare-email.md`, plus a first `.gitignore` covering `.env`. Both scripts read `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ZONE_ID` from the environment only, resolve the domain from the zone at runtime (nothing hardcoded — `mazzagconsulting.com` is still the unconfirmed placeholder #8 flagged), and are idempotent by reading state before every write.
+
+Endpoint shapes were **not** guessed. `developers.cloudflare.com` and `api.cloudflare.com` are both blocked at this environment's proxy (403 on the CONNECT tunnel — same scoped-allowlist class as #9's `support.claude.com` finding), so the two API reference pages named in the request could not be read directly. Rather than write from memory, the shapes came from two authoritative sources that *are* reachable: Cloudflare's published OpenAPI schema (`cloudflare/api-schemas`, via GitHub raw) and the official `cloudflare` npm SDK v7 — cross-checked against each other, plus the Cloudflare docs MCP server for the SMTP settings and plan rules verbatim.
+
+Verified by running against a local mock of those exact endpoints, nine scenarios. The two that matter: with everything already correct the script writes **nothing** (`WRITES:[]`), and when a rule exists pointing at the wrong address it issues a `PUT` to update in place rather than a second `POST` — Cloudflare honours only the first rule when two share a pattern, so a duplicate would silently break routing while looking successful. Also proved: the unverified-destination path stops cleanly at exit 0 without touching rules, and the missing-plan path exits 2 having bought nothing.
+
+**Why it stopped short of a working mailbox:** the remaining work is all hands-and-inbox — Gregory's API token, a verification link only he can click, his Gmail settings page, and two live mail tests. A cloud session has none of those. Handing it over as a spec his own Code seat executes is the honest shape, not a limitation worked around.
+
+**Standing item (needs Gregory's decision, not a seat's):** Email Sending requires **Workers Paid, $5/mo**. If the account is on the free plan the sending half is blocked — receiving still works completely. No seat will enable that plan on his behalf.
+
+**One thing to take from it:** When the source you were told to read is unreachable, the choice is not "guess" or "give up" — it's *find the other authoritative copy*. A vendor's own OpenAPI schema and their official SDK say the same thing as their docs site, and both were one hop away. What would have been unforgivable is writing plausible-looking endpoint paths from memory and calling the script done; that failure only surfaces later, against a real account, as mail that silently doesn't arrive.
+
+— Robot Wrench (Code) seat
+
 ## #9 — 2026-07-21 — Boot-update check: Code's surface is current, three seats unverified by network policy
 
 **What:** Ran preflight (both halves passed — GitHub write confirmed live via `create_branch` reaching a real 422 "already exists," not an auth failure; the leftover `preflight-test` / `preflight-test-push-check` branches couldn't be deleted — `git push --delete` and `origin :branch` both got a clean 403 from the write path, distinct from the 422 create result, so it reads as a missing delete-scope on the GitHub App rather than a broken connection; flagged rather than forced). Then, at the human's request, checked all four seats' `BOOT-PROMPT.md`/`GROUNDING.md` docs against Anthropic's live pages for drift. Read every seat's boot prompt and `onboarding/ONBOARD-YOUR-TEAM.md` in full first. Code/Worker's own surface checked out clean against `code.claude.com/docs/en/overview`: repo-attach auto-boot and the `CLAUDE.md`-loads-automatically claim are still accurate, no changes needed to `seats/worker/` or the "Code — the builder" section of the onboarding doc.

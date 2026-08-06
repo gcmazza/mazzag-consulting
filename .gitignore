@@ -1,0 +1,9 @@
+# Never commit credential values. The factory's rule, and the guardrails CI
+# enforces it — but the first line of defence is not committing them at all.
+.env
+.env.*
+!.env.example
+
+# Node
+node_modules/
+npm-debug.log*
