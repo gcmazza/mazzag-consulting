@@ -22,11 +22,15 @@ which is what the live `mazzag-website` repo's meta tags currently use — that 
 now-confirmed bug in the shipped site (wrong OG/Twitter card domain, wrong canonical URL),
 not just an unconfirmed guess anymore.
 
-**Standing item (needs a session with `mazzag-website` attached):** fix that repo's meta
-tags to `mazza-consulting.com` and re-verify the OG/Twitter preview card (same five-point
-gate as journal #8). The actual Cloudflare email provisioning from #10 still needs a
-**Local** session — a cloud session still cannot mint Gregory's API token, click the
-Cloudflare verification email, or open his Gmail settings.
+**Update, same session:** `mazzag-website` was attached and the meta-tag fix went out —
+canonical, OG, Twitter card, structured data, `sitemap.xml`, and `robots.txt` all corrected
+to `www.mazza-consulting.com`, branch `fix/correct-domain-mazza-consulting`, awaiting
+Gregory's PR. The og-image asset itself was untouched, just its URL. **Not yet done:**
+a live re-check of the rendered OG/Twitter preview card against the corrected URL (same
+five-point gate as journal #8) — that needs the PR merged and deployed first. The actual
+Cloudflare email provisioning from #10 still needs a **Local** session — a cloud session
+still cannot mint Gregory's API token, click the Cloudflare verification email, or open his
+Gmail settings.
 
 **One thing to take from it:** "Confirm the domain with Gregory" (spec step 1) wasn't
 busywork — the guessed placeholder from journal #8 was genuinely wrong, and building on it
