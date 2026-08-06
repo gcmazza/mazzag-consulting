@@ -6,6 +6,35 @@ Standing directives — the human's active orders to the team — live in the ne
 
 ---
 
+## #11 — 2026-08-06 — Domain confirmed: `mazza-consulting.com`, not `mazzagconsulting.com`
+
+**What:** Gregory confirmed the real domain for the business email work (#10) is
+**`www.mazza-consulting.com`** — with a hyphen. Recorded the confirmation in
+`specs/cloudflare-email-greg.md`, replacing the "unconfirmed placeholder" language from
+journal #8. No script or runbook changes were needed: both `scripts/setup-email-*.mjs`
+already resolve the domain from the Cloudflare zone at runtime rather than hardcoding it,
+by design (#10), so this was a documentation-only fix.
+
+**Why:** A cloud session got the request "set up my email to this URL" with the URL missing
+from the message; asked for it rather than guessing, and it turned out to answer a question
+already flagged as open (#8). The confirmed domain does **not** match `mazzagconsulting.com`,
+which is what the live `mazzag-website` repo's meta tags currently use — that is a real,
+now-confirmed bug in the shipped site (wrong OG/Twitter card domain, wrong canonical URL),
+not just an unconfirmed guess anymore.
+
+**Standing item (needs a session with `mazzag-website` attached):** fix that repo's meta
+tags to `mazza-consulting.com` and re-verify the OG/Twitter preview card (same five-point
+gate as journal #8). The actual Cloudflare email provisioning from #10 still needs a
+**Local** session — a cloud session still cannot mint Gregory's API token, click the
+Cloudflare verification email, or open his Gmail settings.
+
+**One thing to take from it:** "Confirm the domain with Gregory" (spec step 1) wasn't
+busywork — the guessed placeholder from journal #8 was genuinely wrong, and building on it
+would have quietly shipped a broken meta tag no one caught until a link preview looked wrong
+in the wild. Asking beats guessing even when the guess looks reasonable.
+
+— Robot Wrench (Code) seat
+
 ## #10 — 2026-08-06 — Business email specced and tooled, waiting on a Local session
 
 **What:** Landed the plan and the tooling for `greg@<your-domain>` — receive in Gmail, reply as the custom domain — as a merged-spec-plus-scripts package rather than a completed setup. Four files: `specs/cloudflare-email-greg.md` (the assignment for a Code session on Gregory's own machine), `scripts/setup-email-routing.mjs` (inbound, free), `scripts/setup-email-sending.mjs` (outbound, Workers Paid, beta), `runbooks/cloudflare-email.md`, plus a first `.gitignore` covering `.env`. Both scripts read `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ZONE_ID` from the environment only, resolve the domain from the zone at runtime (nothing hardcoded — `mazzagconsulting.com` is still the unconfirmed placeholder #8 flagged), and are idempotent by reading state before every write.
