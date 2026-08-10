@@ -40,9 +40,12 @@ the free plan gives. Do not treat it as a failure.
   credential-shaped string appears. Export tokens in the shell for the run only.
 - **Never enable a paid plan on Gregory's behalf.** If the account is not on Workers Paid, stop
   the sending half and report it as a decision for him. The script already exits `2` for this.
-- **Do not hardcode the domain.** Both scripts resolve it from the zone at runtime. The domain
-  `mazzagconsulting.com` appearing in the website repo's meta tags is an **unconfirmed
-  placeholder** (journal #8), not a verified purchase — confirm the real zone with Gregory.
+- **Do not hardcode the domain.** Both scripts resolve it from the zone at runtime.
+  **Confirmed 2026-08-06: the real domain is `www.mazza-consulting.com`** — note the
+  hyphen. This is a different string than `mazzagconsulting.com`, which appears in the
+  `mazzag-website` repo's meta tags (journal #8's unconfirmed placeholder). That mismatch
+  is now a known bug in the live site, not just an unconfirmed guess — flagged in the
+  journal, owner and fix left to whoever next touches `mazzag-website`.
 - **Do not modify** `journal.md` history, `FACTORY.md`'s roster block, or anything under
   `hosting/` or `guides/` (template-managed paths; a factory update would overwrite you).
 
