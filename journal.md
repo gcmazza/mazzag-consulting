@@ -37,8 +37,10 @@ his API token, the Cloudflare verification email, or his Gmail settings) and rep
 a real test message to `greg@mazza-consulting.com` and it arrived in his Gmail. **This is
 Gregory's own observation, not something this seat watched happen** — recorded as reported,
 per RULE 1's spirit of saying what was verified and by whom. Receiving is done. **Sending**
-(replying *as* `greg@mazza-consulting.com`, needs Workers Paid $5/mo) is still unconfirmed —
-not known whether Gregory did that half too.
+(replying *as* `greg@mazza-consulting.com`, needs Workers Paid $5/mo) is confirmed **not**
+done yet — Gregory hasn't gotten to it. Not blocked on anything except his time; the runbook
+(`runbooks/cloudflare-email.md`) and script (`scripts/setup-email-sending.mjs`) are ready
+whenever he picks it back up, from a Local session.
 
 **One thing to take from it:** "Confirm the domain with Gregory" (spec step 1) wasn't
 busywork — the guessed placeholder from journal #8 was genuinely wrong, and building on it
