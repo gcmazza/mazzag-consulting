@@ -24,13 +24,21 @@ not just an unconfirmed guess anymore.
 
 **Update, same session:** `mazzag-website` was attached and the meta-tag fix went out —
 canonical, OG, Twitter card, structured data, `sitemap.xml`, and `robots.txt` all corrected
-to `www.mazza-consulting.com`, branch `fix/correct-domain-mazza-consulting`, awaiting
-Gregory's PR. The og-image asset itself was untouched, just its URL. **Not yet done:**
-a live re-check of the rendered OG/Twitter preview card against the corrected URL (same
-five-point gate as journal #8) — that needs the PR merged and deployed first. The actual
-Cloudflare email provisioning from #10 still needs a **Local** session — a cloud session
-still cannot mint Gregory's API token, click the Cloudflare verification email, or open his
-Gmail settings.
+to `www.mazza-consulting.com` — plus a direct `mailto:greg@mazza-consulting.com` link added
+below the contact form (an existing `.contact-direct` style in `styles.css` had been defined
+but never used). Both on branch `fix/correct-domain-mazza-consulting`, awaiting Gregory's PR.
+Screenshotted in headless Chromium before pushing, not just eyeballed. **Not yet done:** a
+live re-check of the rendered OG/Twitter preview card against the corrected URL (same
+five-point gate as journal #8) — that needs the PR merged and deployed first.
+
+**Update, same session — receiving confirmed working:** Gregory set up Cloudflare Email
+Routing himself (dashboard, not this session's scripts — a cloud session still cannot reach
+his API token, the Cloudflare verification email, or his Gmail settings) and reports he sent
+a real test message to `greg@mazza-consulting.com` and it arrived in his Gmail. **This is
+Gregory's own observation, not something this seat watched happen** — recorded as reported,
+per RULE 1's spirit of saying what was verified and by whom. Receiving is done. **Sending**
+(replying *as* `greg@mazza-consulting.com`, needs Workers Paid $5/mo) is still unconfirmed —
+not known whether Gregory did that half too.
 
 **One thing to take from it:** "Confirm the domain with Gregory" (spec step 1) wasn't
 busywork — the guessed placeholder from journal #8 was genuinely wrong, and building on it
